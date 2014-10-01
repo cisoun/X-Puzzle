@@ -87,7 +87,7 @@ class XPuzzle:
 
 	""" Private constants """
 
-	__LINE_TO_REMOVE	= 2 # Line to remove at each move.
+	__LINES_TO_REMOVE	= 2 # Line to remove at each move.
 
 	# Square decoration
 	if platform.system() == "Windows":
@@ -113,7 +113,7 @@ class XPuzzle:
 		self.size = side * side
 		self.squareSize = 0
 
-		self.__LINE_TO_REMOVE = self.__LINE_TO_REMOVE + side * 2
+		self.__LINES_TO_REMOVE = self.__LINES_TO_REMOVE + side * 2
 
 		self.__generateGrid()
 		self.__hasToFlush = False
@@ -154,6 +154,9 @@ class XPuzzle:
 			self.grid.append([])
 			for y in range(0, self.side):
 				self.grid[x].append(numbers.pop())
+
+		# Cheat @ 3 x 3
+		#self.grid = [[1,2,3],[4,5,6],[0,7,8]]
 
 	"""
 	Draw/write a square with a value at the middle
@@ -234,7 +237,7 @@ class XPuzzle:
 		# Erase the last screen.
 		# TODO: Check if it works on Windows.
 		if self.__hasToFlush:
-			for x in range(self.__LINE_TO_REMOVE):
+			for x in range(self.__LINES_TO_REMOVE):
 				sys.stdout.write("\033[F")
 		
 		# Draw the new grid.
@@ -257,7 +260,7 @@ if __name__ == '__main__':
 	# Intro.
 	print()
 	print('\033[1;31m☰☰☰ X PUZZLE ☰☰☰\033[0m')
-	print('\033[0;3mCreated by Cyriaque Skrapits\033[0m')
+	print('\033[0;3mCreated by Cyriaque \'cisoun\' Skrapits\033[0m')
 	print()
 	print('Use the arrows to move the pieces around the hole.')
 	print('Press Q to quit.')
