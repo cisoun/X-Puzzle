@@ -265,7 +265,19 @@ if __name__ == '__main__':
 	print('Use the arrows to move the pieces around the hole.')
 	print('Press Q to quit.')
 	print()
-	size = int(input('Size (>=' + str(XPuzzle.MIN_SIZE) + ') : '))
+	try:
+		size = input('Size (>=%d) : ' % XPuzzle.MIN_SIZE)
+		# Use minimum size if no input.
+		if size == '':
+			size = XPuzzle.MIN_SIZE
+		size = int(size)
+	# Handle Ctrl+D and Ctrl+C.
+	except (EOFError, KeyboardInterrupt):
+		print()
+		sys.exit(0)
+	# Handle invalid input.
+	except ValueError:
+		size = XPuzzle.MIN_SIZE
 	print()
 
 	# Run the game.
